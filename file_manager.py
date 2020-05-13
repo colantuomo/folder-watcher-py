@@ -4,7 +4,6 @@ import settings
 
 def read_folder():
     files = os.listdir(settings.BASE_PATH)
-    print(f'-- {len(files)} files found --')
     if has_files(files):
         manage_files(files)
     else:
@@ -26,7 +25,8 @@ def manage_files(files):
         if is_video(file):
             move_file(file, 'videos')
         if is_pdf(file):
-            move_file(file, 'pdfs')            
+            move_file(file, 'pdfs')
+    print(f'-- {len(files)} files found --')
 
 def move_file(file, folder):
     new_path = '{}/{}'.format(settings.BASE_PATH, folder)

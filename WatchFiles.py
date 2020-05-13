@@ -17,7 +17,8 @@ class CustomHandler(FileSystemEventHandler):
     #     print('on modified')
 
     def on_moved(self, event):
-        print('on moved')
+        print('Moving new file...')
+        file_manager.read_folder()
 
     def on_deleted(self, event):
         print('on deleted')
