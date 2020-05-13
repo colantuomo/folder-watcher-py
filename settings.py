@@ -1,1 +1,1 @@
-basePath = '/home/paulomartins/Downloads'
+BASE_PATH = '/home/paulomartins/Downloads'
