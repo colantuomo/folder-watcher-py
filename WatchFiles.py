@@ -5,6 +5,9 @@ from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
 from watchdog.events import FileSystemEventHandler
 import start
+import settings
+
+basePath = settings.basePath
 
 class CustomHandler(FileSystemEventHandler):
     
@@ -26,11 +29,11 @@ if __name__ == "__main__":
                         format='%(asctime)s - %(message)s',
                         datefmt='%Y-%m-%d %H:%M:%S')
     # path = sys.argv[1] if len(sys.argv) > 1 else '.'
-    path = '/home/paulomartins/Personal/move-folders-test/old-folder/'
+    # path = '/home/paulomartins/Personal/move-folders-test/old-folder/'
     event_handler = CustomHandler()
     # file_system_handler = FileSystemEventHandler()
     observer = Observer()
-    observer.schedule(event_handler, path, recursive=True)
+    observer.schedule(event_handler, basePath, recursive=True)
     observer.start()
     try:
         while True:

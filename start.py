@@ -1,15 +1,16 @@
 import os
 import shutil
+import settings
 
-basePath = '/home/paulomartins/Personal/move-folders-test'
-path = basePath + '/old-folder'
+basePath = settings.basePath
 
 def readFolder():
-    files = os.listdir(path)
+    files = os.listdir(basePath)
+    print('-- {} files found --'.format(len(files)))
     if hasFiles(files):
         manageFiles(files)
     else:
-        print('== Nothing to move ==')
+        print('== Empty folder - Nothing to move ==')
 
 def hasFiles(files):
     return len(files) > 0
@@ -17,18 +18,22 @@ def hasFiles(files):
 def manageFiles(files):
     for file in files:
         if isAImage(file):
-            moveFile(file, 'new-folder')
+            moveFile(file, 'imgs')
+        if isSheet(file):
+            moveFile(file, 'sheets')            
 
 def moveFile(file, folder):
     newPath = '{}/{}'.format(basePath, folder)
-    filePath = '{}/{}'.format(path, file)
+    filePath = '{}/{}'.format(basePath, file)
     shutil.move(filePath, newPath)
     print(f'== "{file}" moving to {newPath} ==')
 
-def isSheet():
-    return file.find('.xls') != -1
+def isSheet(file):
+    types = ['.xlsx', '.xls']
+    return any(x in file for x in types)
 
 def isAImage(file):
-    return file.find('.png') != -1
+    types = ['.png', '.jpeg']
+    return any(x in file for x in types)
 
 readFolder()    
