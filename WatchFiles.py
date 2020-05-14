@@ -30,7 +30,7 @@ if __name__ == "__main__":
     # path = sys.argv[1] if len(sys.argv) > 1 else '.'
     event_handler = CustomHandler()
     observer = Observer()
-    observer.schedule(event_handler, settings.BASE_PATH, recursive=True)
+    observer.schedule(event_handler, settings.get_base_path(), recursive=True)
     observer.start()
     try:
         while True:
