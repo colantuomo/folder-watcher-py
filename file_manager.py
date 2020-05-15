@@ -37,8 +37,10 @@ def _manage_files(files):
 def move_file(file, folder):
     new_path = '{}/{}'.format(settings.get_base_path(), folder)
     file_path = '{}/{}'.format(settings.get_base_path(), file)
+    if not os.path.isdir(new_path):
+        os.mkdir(new_path)
     shutil.move(file_path, new_path)
-    print(f'FILE: [{file}] move to: [{new_path}]')
+    print(f'FILE: [{file}] moving to: [{new_path}]')
 
 
 def is_pdf(file):
