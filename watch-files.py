@@ -3,25 +3,9 @@ import time
 import logging
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
-from watchdog.events import FileSystemEventHandler
 import file_manager
 import settings
-
-class CustomHandler(FileSystemEventHandler):
-    
-    def on_created(self, event):
-        print('on created')
-        file_manager.read_folder()
-
-    # def on_modified(self, event):
-    #     print('on modified')
-
-    def on_moved(self, event):
-        print('Moving new file...')
-        file_manager.read_folder()
-
-    def on_deleted(self, event):
-        print('on deleted')
+from CustomHandler import CustomHandler
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
@@ -32,6 +16,8 @@ if __name__ == "__main__":
     observer = Observer()
     observer.schedule(event_handler, settings.get_base_path(), recursive=True)
     observer.start()
+    print('watch started.')
+    file_manager.read_folder()
     try:
         while True:
             time.sleep(1)
