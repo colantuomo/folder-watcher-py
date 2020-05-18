@@ -4,7 +4,6 @@ import settings
 
 
 def read_folder():
-    # files = os.listdir(settings.get_base_path())
     files = [f for f in os.listdir(
         settings.get_base_path()) if os.path.isfile(os.path.join(settings.get_base_path(), f))]
     if _has_files(files):
