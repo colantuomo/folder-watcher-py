@@ -1,5 +1,7 @@
 import os
 import shutil
+import datetime
+
 import settings
 
 
@@ -35,11 +37,19 @@ def _manage_files(files):
 
 def move_file(file, folder):
     new_path = '{}/{}'.format(settings.get_base_path(), folder)
-    file_path = '{}/{}'.format(settings.get_base_path(), file)
+    path_with_file = new_path + '/' + file
+    current_date = datetime.datetime.today().strftime('%H:%M:%S')
+    file_renamed = file
     if not os.path.isdir(new_path):
         os.mkdir(new_path)
+    if os.path.isfile(path_with_file):
+        file_strs = file.split('.')
+        file_renamed = file_strs[0] + '_' + current_date + '.' + file_strs[1]
+        file_ph = settings.get_base_path() + '/' + file
+        os.rename(r''+file_ph, r''+settings.get_base_path()+'/'+file_renamed)
+    file_path = '{}/{}'.format(settings.get_base_path(), file_renamed)
     shutil.move(file_path, new_path)
-    print(f'FILE: [{file}] moving to: [{new_path}]')
+    print(f'FILE: [{file_renamed}] moving to: [{new_path}]')
 
 
 def is_pdf(file):

@@ -8,7 +8,7 @@ class CustomHandler(FileSystemEventHandler):
 
     def on_created(self, event):
         print('on created')
-        # file_manager.read_folder()
+        file_manager.read_folder()
 
     # def on_modified(self, event):
     #     print('on modified')
